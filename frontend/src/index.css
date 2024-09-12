@@ -10,3 +10,6 @@ body {
 	background-position: center;
 }
 
+.max-h-Custscreen{
+	max-height: 76vh;
+}
