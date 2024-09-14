@@ -1,8 +1,21 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import useSignup from '../../hooks/useSignup';
 
 const SignUp = () => {
+
+  const [data , setData] = useState({
+    fullname : "",
+    username : "",
+    password : "",
+    confirmPass : "",
+    gender : ""
+    // profilePic // TODO add profile pic to choose for the user
+  });
+
+  const {loading , signup } = useSignup();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -11,6 +24,16 @@ const SignUp = () => {
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
+
+  const setGender = (gender : "male" | "female") => {
+    setData({...data , gender : gender})
+  }
+
+
+  const handleSubmitForm =  (e:React.FormEvent) => {
+    e.preventDefault();
+    signup(data);
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
@@ -22,7 +45,7 @@ const SignUp = () => {
           </span>
           <span> ?</span>
         </h1>
-        <form>
+        <form onSubmit={handleSubmitForm}>
     
 
           {/* FullName Field */}
@@ -30,7 +53,11 @@ const SignUp = () => {
             <label className="label p-2">
               <span className="text-base label-text">Name</span>
             </label>
-            <input type="text" placeholder="Enter your name -> ex: Anas Ibrahem" className="w-full input input-bordered h-12" />
+            <input 
+              disabled = {loading}
+              onChange={(e) => setData({...data , fullname : e.target.value})}
+              value={data.fullname} type="text"
+              placeholder="Enter your name -> ex: Anas Ibrahem" className="w-full input input-bordered h-12" />
           </div>
 
           {/* UserName Field */}
@@ -38,7 +65,11 @@ const SignUp = () => {
             <label className="label p-2">
               <span className="text-base label-text">Username</span>
             </label>
-            <input type="text" placeholder="Choose your username -> ex: anas-ibrahem" className="w-full input input-bordered h-12" />
+            <input  
+             disabled = {loading}
+             onChange={(e) => setData({...data , username : e.target.value})}
+             value={data.username} type="text" 
+             placeholder="Choose your username -> ex: anas-ibrahem" className="w-full input input-bordered h-12" />
           </div>
 
 
@@ -48,6 +79,9 @@ const SignUp = () => {
               <span className="text-base label-text">Password</span>
             </label>
             <input
+              disabled = {loading}
+              value={data.password}
+              onChange={(e) => setData({...data , password : e.target.value})}
               type={showPassword ? "text" : "password"}
               className="w-full input input-bordered h-12"
               placeholder="Choose your password"
@@ -69,6 +103,9 @@ const SignUp = () => {
               <span className="text-base label-text">Confirm Password</span>
             </label>
             <input
+              disabled = {loading}
+              value={data.confirmPass}
+              onChange={(e) => setData({...data , confirmPass : e.target.value})}
               type={showConfirmPassword ? "text" : "password"}
               className="w-full input input-bordered h-12"
               placeholder="Confirm your password"
@@ -83,6 +120,8 @@ const SignUp = () => {
               {showConfirmPassword ? "Hide" : "Show"}
             </button>
           </div>
+
+          
           {/* Gender RadioButton */}
 
           <div className="pb-4">
@@ -93,12 +132,12 @@ const SignUp = () => {
               
               <label className="flex items-center">
                 <input
+                  disabled = {loading}
                   type="radio"
                   name="gender"
                   value="male"
-                  // checked={gender === "male"}
-                  // onChange={handleGenderChange}
                   className="radio radio-primary "
+                  onChange={() => setGender("male")}
                 />
                 <span className="ml-2">Male</span>
               </label>
@@ -106,11 +145,11 @@ const SignUp = () => {
 
               <label className="flex items-center pl-3">
                 <input
+                  disabled = {loading}
                   type="radio"
                   name="gender"
                   value="female"
-                  // checked={gender === "female"}
-                  // onChange={handleGenderChange}
+                  onChange={() => setGender("female")}
                   className="radio radio-secondary"
                 />
                 <span className="ml-2">Female</span>
@@ -127,8 +166,9 @@ const SignUp = () => {
 
 
           {/* Submit Button */}
-          <button type="submit" className="w-full btn btn-primary mt-4">
-            Submit
+          <button type="submit" className="w-full btn btn-primary mt-4 " disabled = {loading}>
+
+            {loading ? "Loading..." : "Sign Up"}
           </button>
 
 

@@ -1,12 +1,24 @@
 import { useState } from 'react';
+import useLogin from '../../hooks/useLogin';
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
 
+  const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  const [data , setData] = useState({
+    username : "",
+    password : "",
+  });
+
+  const {loading , login} = useLogin();
+
+  const handleLoginForm =  (e:React.FormEvent) => {
+    e.preventDefault();
+    login(data);
+  }
 
 
   return (
@@ -19,7 +31,7 @@ const Login = () => {
           </span>
           <span> !</span>
         </h1>
-        <form>
+        <form onSubmit={handleLoginForm}>
     
 
           {/* UserName Field */}
@@ -27,7 +39,11 @@ const Login = () => {
             <label className="label p-2">
               <span className="text-base label-text">Username</span>
             </label>
-            <input type="text" placeholder="Enter your username -> ex: anas-ibrahem" className="w-full input input-bordered h-12" />
+            <input
+            disabled = {loading}
+            onChange={(e) => setData({...data , username : e.target.value})}
+            value={data.username} 
+            type="text" placeholder="Enter your username -> ex: anas-ibrahem" className="w-full input input-bordered h-12" />
           </div>
 
 
@@ -37,6 +53,9 @@ const Login = () => {
               <span className="text-base label-text">Password</span>
             </label>
             <input
+              disabled = {loading}
+              onChange={(e) => setData({...data , password : e.target.value})}
+              value={data.password}
               type={showPassword ? "text" : "password"}
               className="w-full input input-bordered h-12"
               placeholder="Enter your password"
@@ -57,8 +76,8 @@ const Login = () => {
             </a>
 
           {/* Submit Button */}
-          <button type="submit" className="w-full btn btn-primary mt-4">
-            Login
+          <button type="submit" className="w-full btn btn-primary mt-4" disabled={loading}>
+            {loading ? "Loading..." : "Login"}
           </button>
 
 
