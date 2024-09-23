@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 // Define the AuthUserType type
 type AuthUserType = {
 	id: string;
-	fullName: string;
+	fullname: string;
 	email: string;
 	profilePic: string;
 	gender: string;

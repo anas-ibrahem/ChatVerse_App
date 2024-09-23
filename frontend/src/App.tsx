@@ -4,12 +4,17 @@ import SignUp from "./pages/signup/SignUp";
 import Home from "./pages/home/Home";
 import { useAuthContext } from "./context/AuthContext";
 import { Toaster } from "react-hot-toast";
+import Loader from "./components/Loader";
 
 function App() {
   const {	authUser , setAuthUser , isLoading} = useAuthContext();
   console.log("AUTHED USER"  , authUser);  //TODO remove this line
   if (isLoading) {  
-    return <div>Loading...</div>; // TODO replace this with a loading spinner
+    return (
+      <div className="flex justify-center items-center h-screen">
+          <Loader large={true} />
+      </div>
+    )
   }
   
   return (
