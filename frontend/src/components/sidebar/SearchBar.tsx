@@ -20,11 +20,11 @@ function SearchBar() {
   }
 
   return (
-    <form className="flex items-center gap-2 sm:w-full w-52" onSubmit={handleSearch}>
+    <form className="flex items-center gap-2" onSubmit={handleSearch}>
     <input
       type="text"
       placeholder="Search.."
-      className="input input-bordered rounded-full sm:w-full w-32 "
+      className="input input-bordered rounded-full sm:w-full w-3/4 "
       value={search}
       onChange={(e) => setSearch(e.target.value)}/>
       <button type="submit" className="btn btn-circle bg-sky-500 text-white ">

@@ -21,5 +21,4 @@ server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-// TODO add socket.io for real-time chat
 // TODO Config for production

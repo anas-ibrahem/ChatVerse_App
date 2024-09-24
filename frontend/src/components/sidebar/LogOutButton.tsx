@@ -6,10 +6,15 @@ interface LogOutButtonProps {
 
 const LogOutButton = ({ loading }: LogOutButtonProps) => {
   return (
-    <div className="mt-auto">
-      <TbLogout2
-        className={`w-6 h-6 text-white ${loading ? 'text-gray-400' : ' cursor-pointer hover:text-gray-400'}`}
-      />
+    <div 
+      className={`flex items-center m-auto cursor-pointer 
+        ${loading ? 'text-gray-400' : 'hover:text-gray-200'}`}
+      onClick={loading ? undefined : () => console.log("Logout clicked")} 
+    >
+      <TbLogout2 className={`w-6 h-6 ${loading ? 'text-gray-400' : ''}`} />
+      <span className={`ml-2 ${loading ? 'text-gray-400' : ''}`}> 
+        LogOut
+      </span>
     </div>
   );
 };
