@@ -9,8 +9,8 @@ function MessageInput() {
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
-    if (message === '') return;
     e.preventDefault();
+    if (message === '') return;
     await sendMessage(message);
     setMessage('');
   }

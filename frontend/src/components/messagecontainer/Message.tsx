@@ -14,7 +14,7 @@ function Message({ message }: { message: Message }) {
   return (
     <div className={`chat ${chatClass}`}>
       <div className="chat-image avatar">
-        <div className="w-5 sm:w-10 rounded-full">
+        <div className="w-7 sm:w-10 rounded-full">
           <img alt="Tailwind CSS chat bubble component" src={chatImage} />
         </div>
       </div>

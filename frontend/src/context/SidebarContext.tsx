@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
+import isMobile from 'is-mobile';
 
 interface SidebarContextType {
   isCollapsed: boolean;
@@ -20,7 +21,7 @@ interface SidebarProviderProps {
 }
 
 export const SidebarProvider = ({ children }: SidebarProviderProps) => {
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(isMobile());
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);

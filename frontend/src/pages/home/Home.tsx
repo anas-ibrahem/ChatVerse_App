@@ -13,7 +13,7 @@ const Home: React.FC = () => {
         sm:w-[1000px]
         md:w-3/4
         w-11/12
-        h-3/4
+        h-[90vh]
         sm:h-[550px]
         rounded-lg overflow-hidden bg-gray-400 bg-clip-padding 
         backdrop-filter backdrop-blur-lg bg-opacity-5 shadow-md">
@@ -32,20 +32,23 @@ const HomeContent: React.FC = () => {
   return (
     <>
       {/* Sidebar */}
-      <div className={`${isCollapsed ? 'hidden' : 'block'} sm:w-[400px] w-[200px]`}>
+      <div className={`${isCollapsed ? 'hidden' : 'block'} sm:w-[400px] w-full`}>
         <SideBar />
       </div>
 
       {/* Toggle button */}
       <FaArrowRight
         onClick={toggleSidebar}
-        className={`opacity-50 rotate-180 cursor-pointer absolute bottom-16 transition-all duration-300 z-10  rounded-full text-white sm:h-[35px] sm:w-[35px]
+        className={`opacity-50 rotate-180 cursor-pointer absolute ms:top-1 top-2 transition-all duration-300 z-10 
+          rounded-full text-white sm:h-[32px] sm:w-[32px]
           h-[20px] w-[20px]
-          ${isCollapsed ? 'rotate-0 left-4' : isMobileScreen ? 'left-[210px]' : 'left-[414px]'}`} 
+          hover:opacity-100 hover:shadow-lg hover:scale-110 transition-all
+          ${isCollapsed ? 'rotate-0 left-1' : isMobileScreen ? 'left-[78vw]' : 'left-[406px]'}`} 
       />
 
+
       {/* Message container */}
-      <div className="flex-grow">
+      <div className={`${!isCollapsed && isMobileScreen ? 'hidden' : 'block'} flex-grow`}>
         <MsgContainer />
       </div>
     </>

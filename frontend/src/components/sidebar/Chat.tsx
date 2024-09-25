@@ -1,6 +1,7 @@
 import useChat from "../../zustand/useChat";
 import { useSocketContext } from "../../context/SocketContext";
 import isMobile from "is-mobile";
+import { useSidebar } from "../../context/SidebarContext";
 
 export default function Chat({ chat }: { chat: Chat }) {
   const { onlineUsers } = useSocketContext();
@@ -8,14 +9,18 @@ export default function Chat({ chat }: { chat: Chat }) {
 
   const { setSelectedChat, selectedChat } = useChat();
   let isSelected = selectedChat?.id === chat.id;
-
+  const { toggleSidebar} = useSidebar();
   return (
     <div className="flex flex-col">
       <div
         className={`flex gap-3 items-center px-2 mr-4 cursor-pointer rounded-2xl ${
           isSelected ? 'bg-sky-700' : `hover:bg-slate-500`
         }`}
-        onClick={() => setSelectedChat(chat)}
+        onClick={() => 
+          {setSelectedChat(chat)
+            if (isMobile())
+              toggleSidebar();
+          }}
       >
         <div className={`avatar py-1 ${isOnline ? 'online' : 'offline'}`}>
           <div className={`${isMobile() ? 'w-10' : 'w-14'}`}>

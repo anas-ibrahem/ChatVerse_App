@@ -13,7 +13,7 @@ const MsgContainer = () => {
     <div className="flex flex-col h-full">
       {selectedChat ? (
         <>
-          <div className="bg-slate-500 px-4 py-2 mb-2">
+          <div className="bg-slate-500 ml-12 px-4 py-2 mb-2 rounded-bl-xl">
             <span className="label-text">To</span>{" "}
             <span className="text-gray-800 font-bold">{selectedChat.fullname}</span>
           </div>

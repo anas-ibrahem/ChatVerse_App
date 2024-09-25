@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState , useRef , useEffect } from 'react';
 import useLogin from '../../hooks/useLogin';
 
 const Login = () => {
@@ -19,6 +19,13 @@ const Login = () => {
     e.preventDefault();
     login(data);
   }
+
+  const passwordInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (passwordInputRef.current) 
+      passwordInputRef.current.focus();
+  } , [showPassword]);
 
 
   return (
@@ -53,6 +60,7 @@ const Login = () => {
               <span className="text-base label-text">Password</span>
             </label>
             <input
+              ref={passwordInputRef}
               disabled = {loading}
               onChange={(e) => setData({...data , password : e.target.value})}
               value={data.password}
